@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/search_nav"
+            android:title="Search Event"></item>
+
+        <item
+            android:id="@+id/create_nav"
+            android:title="Create Event"></item>
+
+        <item
+            android:id="@+id/hot_nav"
+            android:title="What's Hot?"></item>
+        <item
+            android:id="@+id/profile_nav"
+            android:title="My Profile"></item>
+    </group>
+
+    <item android:title="more">
+
+        <menu>
+            <item
+                android:id="@+id/privacy_nav"
+                android:title="Privacy policy"></item>
+            <item
+                android:id="@+id/about_nav"
+                android:title="About us"></item>
+            <item
+                android:id="@+id/help_nav"
+                android:title="Help"></item>
+            <item
+                android:id="@+id/share_nav"
+                android:title="Share"></item>
+        </menu>
+
+    </item>
+
+</menu>

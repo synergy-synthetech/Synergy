@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "336184209379",
+    "firebase_url": "https://synergy-9f467.firebaseio.com",
+    "project_id": "synergy-9f467",
+    "storage_bucket": "synergy-9f467.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336184209379:android:4b4b6898f707cef5",
+        "android_client_info": {
+          "package_name": "com.synthetech.synergyeventmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336184209379-raqs9gd1m2fkk973bf7v4ekhelu0d2n2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB368zTwoX1TskQ_oogNZlfYjQNzmzDvI8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
