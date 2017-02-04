@@ -9,11 +9,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -27,6 +33,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button logout;
     private FirebaseAuth firebaseAuth;
     private FloatingActionButton fab_edit_profile;
+    ListView profile_events;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -42,6 +49,46 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         email_profile = (TextView) profileFragmentView.findViewById(R.id.email_profile);
         firebaseAuth = FirebaseAuth.getInstance();
 
+        profile_events= (ListView)profileFragmentView.findViewById(R.id.profile_event_list_view);
+
+        //inflating List View
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Event");
+
+        FirebaseListAdapter<CreateEvent> firebaseListAdapter = new FirebaseListAdapter<CreateEvent>(
+                this.getActivity(),
+                CreateEvent.class,
+                R.layout.event_list_view_item,
+                databaseReference) {
+            @Override
+            protected void populateView(View v, CreateEvent eventData, int position) {
+
+                TextView eventName_listView = (TextView) v.findViewById(R.id.event_name_listView);
+                TextView eventOrganisation_listView = (TextView) v.findViewById(R.id.event_organisation_listView);
+                TextView eventCreator_listView = (TextView) v.findViewById(R.id.event_createdby_listView);
+
+                eventName_listView.setText(eventData.getName());
+                eventOrganisation_listView.setText(eventData.getOrganisation());
+                eventCreator_listView.setText(eventData.getCreatorEmail());
+
+
+
+
+            }
+        };
+        profile_events.setAdapter(firebaseListAdapter);
+
+
+        profile_events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                Toast.makeText(view.getContext(), "Position: "+position+" "+databaseReference.getDatabase().getReference(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        //End of Inflation of listview
 
         fab_edit_profile = (FloatingActionButton) profileFragmentView.findViewById(R.id.fab_edit_profile);
         fab_edit_profile.setOnClickListener(this);
