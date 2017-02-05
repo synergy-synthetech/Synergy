@@ -65,7 +65,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
         sales_create = (Switch) createFragmentView.findViewById(R.id.sales_create);
         fnb_create = (Switch) createFragmentView.findViewById(R.id.fnb_create);
 
-        button_back_create = (Button) createFragmentView.findViewById(R.id.button_back_create);
+        //button_back_create = (Button) createFragmentView.findViewById(R.id.button_back_create);
         button_create = (Button) createFragmentView.findViewById(R.id.button_create);
 
         if (firebaseAuth.getCurrentUser() == null) {

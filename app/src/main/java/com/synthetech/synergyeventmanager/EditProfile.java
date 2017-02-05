@@ -46,6 +46,8 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         email_edit.setText(user.getEmail());
 
+
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         save_edit.setOnClickListener(this);
