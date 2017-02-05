@@ -34,14 +34,26 @@ public class CreateEvent {
         return email;
     }
 
-    public String getCreator_uid(){
+    public String getCreator_uid() {
         return creator_uid;
     }
 
-    public String getUID(){
+    public String getUID() {
         String UID;
-        UID = getName()+"_"+getCreator_uid();
+        UID = getName() + "_" + getCreator_uid();
         return UID;
+    }
+
+    public String getDate(){
+        return date;
+    }
+
+    public String getWebsite(){
+        return website;
+    }
+
+    public String getVenue(){
+        return venue;
     }
 
 }
