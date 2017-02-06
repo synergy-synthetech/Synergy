@@ -23,7 +23,7 @@
         android:visibility="gone"
         android:id="@+id/fab_event_profile"/>
 
-
+        
 
     <TextView
         android:layout_marginTop="20dp"
@@ -67,13 +67,14 @@
         android:text="Admin: "
         android:id="@+id/admin_eventProfile"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            android:layout_gravity="bottom|center"
-            app:backgroundTint="?android:attr/colorPrimaryDark"
-            />
-
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_add"
+        android:layout_gravity="bottom|center"
+        app:backgroundTint="?android:attr/colorPrimaryDark"
+        android:id="@+id/dept" />
+
 </FrameLayout>

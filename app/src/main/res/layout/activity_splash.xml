@@ -12,12 +12,11 @@
     tools:context="com.synthetech.synergyeventmanager.SplashActivity">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         app:srcCompat="@drawable/synergy_logo"
         android:id="@+id/splash_logo"
-        android:scaleType="centerCrop"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:scaleType="centerCrop" />
 </RelativeLayout>
