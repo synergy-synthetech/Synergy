@@ -43,7 +43,7 @@ public class SearchFragment extends Fragment {
 
         progressDialog = new ProgressDialog(this.getActivity());
         progressDialog.setMessage("Loading latest events...");
-        progressDialog.show();
+
 
 
         events = (ListView) searchFragmentView.findViewById(R.id.eventsListViewSearchFragment);
@@ -51,7 +51,7 @@ public class SearchFragment extends Fragment {
 
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Event");
 
-
+        progressDialog.show();
 
         FirebaseListAdapter<CreateEvent> firebaseListAdapter = new FirebaseListAdapter<CreateEvent>(
                 this.getActivity(),
@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
                 fr.setArguments(args);
                 ft.replace(R.id.main_container, fr);
                 ft.commit();
-                Toast.makeText(view.getContext(), "Event Name: "+eventData.getName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "Event Name: "+eventData.getName(), Toast.LENGTH_SHORT).show();
 
             }
         });

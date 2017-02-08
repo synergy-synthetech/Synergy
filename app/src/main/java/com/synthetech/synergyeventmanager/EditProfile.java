@@ -2,6 +2,7 @@ package com.synthetech.synergyeventmanager;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -44,8 +49,30 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        email_edit.setText(user.getEmail());
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/User/"+user.getUid());
 
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInformation userInformation = dataSnapshot.getValue(UserInformation.class);
+                String name = userInformation.getName();
+                String phone = userInformation.getPhone();
+
+                if (name != null)
+                    name_edit.setText(name);
+
+                if (phone != null)
+                    phone_edit.setText(phone);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        email_edit.setText(user.getEmail());
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -56,18 +83,18 @@ public class EditProfile extends Fragment implements View.OnClickListener {
     }
 
 
-    public void saveUserInformation(){
+    public void saveUserInformation() {
         String name = name_edit.getText().toString().trim();
         String phone = phone_edit.getText().toString().trim();
         String email = email_edit.getText().toString().trim();
 
 
-        UserInformation userInformation = new UserInformation(name,phone,email);
+        UserInformation userInformation = new UserInformation(name, phone, email);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-
-        databaseReference.child("User/"+user.getUid()).setValue(userInformation);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("User/" + user.getUid()).setValue(userInformation);
     }
 
     @Override
@@ -75,7 +102,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         if (v == save_edit) {
             //Update
             saveUserInformation();
-            Toast.makeText(this.getActivity(), "Changes updated!", Toast.LENGTH_SHORT).show();
+            Snackbar.make(this.getView(), "Changes updated!", Snackbar.LENGTH_SHORT).show();
         }
 
     }

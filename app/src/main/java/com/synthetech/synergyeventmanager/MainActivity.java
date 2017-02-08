@@ -10,10 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import static com.synthetech.synergyeventmanager.R.id.drawer_header_user_email;
 
 public class MainActivity extends AppCompatActivity {
     //Drawer - Declaration
     DrawerLayout drawerLayout;
+    TextView email_header;
+    ImageView profile_image_header;
+
 
     //Toolbar declaration
     Toolbar toolbar;
@@ -41,11 +51,19 @@ public class MainActivity extends AppCompatActivity {
         //Initialise drawerlayout var
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+
+
         //Set actions
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
 
+
+
         //Drawer listener
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+
+
+
 
         //Begin transaction to display the search (home) fragment
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -59,7 +77,20 @@ public class MainActivity extends AppCompatActivity {
         //You can set the title if you want to...
         getSupportActionBar().setTitle("Synergy Event Manager");
 
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        View hView = navigationView.getHeaderView(0);
+
+        email_header = (TextView) hView.findViewById(drawer_header_user_email);
+        profile_image_header = (ImageView) hView.findViewById(R.id.drawer_header_user_image);
+
+        if (firebaseAuth.getCurrentUser() != null) {
+            email_header.setVisibility(View.VISIBLE);
+            profile_image_header.setVisibility(View.VISIBLE);
+            email_header.setText(firebaseAuth.getCurrentUser().getEmail());
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -220,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }//End of Switch
+
 
 
                 return false;
