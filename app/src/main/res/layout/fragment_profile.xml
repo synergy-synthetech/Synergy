@@ -15,14 +15,6 @@
         android:weightSum="1">
 
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.17"
-            android:paddingBottom="16dp"
-            app:srcCompat="@color/colorAccent" />
-
         <TextView
             android:id="@+id/email_profile"
             android:layout_width="match_parent"

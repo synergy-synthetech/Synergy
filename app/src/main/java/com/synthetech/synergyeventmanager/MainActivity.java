@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         //Set the view for search fragment
         fragmentTransaction.add(R.id.main_container, new SearchFragment());
 
+
+
         //Commit the fragment transaction
         fragmentTransaction.commit();
 
@@ -74,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         //Set the view for search fragment
                         fragmentTransaction.replace(R.id.main_container, new SearchFragment());
 
+
+
                         //Commit the fragment transaction
                         fragmentTransaction.commit();
 
@@ -94,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         //Set the view for Create fragment
                         fragmentTransaction.replace(R.id.main_container, new CreateFragment());
 
+                        fragmentTransaction.addToBackStack("test");
                         //Commit the fragment transaction
                         fragmentTransaction.commit();
 
@@ -132,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                         //Set the view for Profile fragment
                         fragmentTransaction.replace(R.id.main_container, new ProfileFragment());
 
+                        fragmentTransaction.addToBackStack("test");
+
                         //Commit the fragment transaction
                         fragmentTransaction.commit();
 
@@ -150,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
 
                         //Set the view for privacy fragment
                         fragmentTransaction.replace(R.id.main_container, new PrivacyFragment());
+
+                        fragmentTransaction.addToBackStack("test");
 
                         //Commit the fragment transaction
                         fragmentTransaction.commit();

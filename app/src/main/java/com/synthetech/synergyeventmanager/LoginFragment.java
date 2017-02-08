@@ -28,7 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private EditText email_login, password_login;
-    private TextView register_login;
+    private TextView register_login,forgot_password;
     private Button button_login;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -48,6 +48,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         password_login = (EditText) userLoginFragment.findViewById(R.id.password_login);
         register_login = (TextView) userLoginFragment.findViewById(R.id.register_login);
         button_login = (Button) userLoginFragment.findViewById(R.id.button_login);
+        forgot_password= (TextView)userLoginFragment.findViewById(R.id.forgot_password_textview);
         progressDialog = new ProgressDialog(this.getActivity());
 
 
@@ -79,6 +80,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_container, userRegisterFragment);
             fragmentTransaction.commit();
+
+
         }
 
     }//End of onClick() method

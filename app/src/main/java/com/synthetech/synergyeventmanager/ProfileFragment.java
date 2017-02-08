@@ -128,7 +128,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_container, editProfile);
+
             fragmentTransaction.commit();
         }
     }
+
+
 }
+
