@@ -59,7 +59,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 this.getActivity(),
                 CreateEvent.class,
                 R.layout.event_list_view_item,
-                databaseReference) {
+                databaseReference.orderByChild("creator_uid").equalTo(firebaseAuth.getCurrentUser().getUid())) {
             @Override
             protected void populateView(View v, CreateEvent eventData, int position) {
 
@@ -68,14 +68,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 TextView eventCreator_listView = (TextView) v.findViewById(R.id.event_createdby_listView);
                 LinearLayout layout = (LinearLayout) v.findViewById(R.id.event_list_view);
 
-                if (eventData.getCreator_uid().equals(firebaseAuth.getCurrentUser().getUid())) {
+
                     eventName_listView.setText(eventData.getName());
                     eventOrganisation_listView.setText(eventData.getOrganisation());
                     eventCreator_listView.setText(eventData.getCreatorEmail());
 
-                }
-                else
-                    layout.setVisibility(View.GONE);
 
 
             }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class EventProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View EventProfileFragmentView = inflater.inflate(R.layout.fragment_event_profile, container, false);
-        String event_uid = getArguments().getString("EventUID");
+        final String event_uid = getArguments().getString("EventUID");
 
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Event/" + event_uid);
@@ -65,14 +67,30 @@ public class EventProfileFragment extends Fragment {
 
                 LinearLayout edit_event_menu = (LinearLayout) EventProfileFragmentView.findViewById(R.id.edit_event_menu);
                 FloatingActionButton edit_event_profile_button = (FloatingActionButton) EventProfileFragmentView.findViewById(R.id.fab_event_profile);
+                final FloatingActionButton more_event_options = (FloatingActionButton) EventProfileFragmentView.findViewById(R.id.more_event_options);
 
+                more_event_options.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (v == more_event_options) {
+                            Fragment fr=new MoreEventOptions();
+                            FragmentManager fm=getFragmentManager();
+                            FragmentTransaction ft=fm.beginTransaction();
+                            Bundle args = new Bundle();
+                            args.putString("EventUID", event_uid);
+                            fr.setArguments(args);
+                            ft.replace(R.id.main_container, fr);
+                            ft.commit();
+                        }
+                    }
+                });
 
-                name_eventProfile.setText("Event name: "+eventData.getName());
-                organisation_eventProfile.setText("Organisation: "+eventData.getOrganisation());
-                date_eventProfile.setText("Date: "+eventData.getDate());
-                venue_eventProfile.setText("Venue: "+eventData.getVenue());
-                website_eventProfile.setText("Website: "+eventData.getWebsite());
-                admin_eventProfile.setText("Admin: "+eventData.getCreatorEmail());
+                name_eventProfile.setText("Event name: " + eventData.getName());
+                organisation_eventProfile.setText("Organisation: " + eventData.getOrganisation());
+                date_eventProfile.setText("Date: " + eventData.getDate());
+                venue_eventProfile.setText("Venue: " + eventData.getVenue());
+                website_eventProfile.setText("Website: " + eventData.getWebsite());
+                admin_eventProfile.setText("Admin: " + eventData.getCreatorEmail());
 
                 event_name_listView.setText(eventData.getName());
                 event_organisation_listView.setText(eventData.getOrganisation());
