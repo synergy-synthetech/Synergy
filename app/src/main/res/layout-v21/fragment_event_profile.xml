@@ -10,71 +10,90 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <include layout="@layout/event_list_view_item"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        <include
+            layout="@layout/event_list_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:padding="5dp"
-        app:srcCompat="@android:drawable/ic_menu_edit"
-        android:visibility="gone"
-        android:id="@+id/fab_event_profile"/>
+        <LinearLayout
+            android:id="@+id/edit_event_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
-        
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:paddingRight="20dp"
+                android:text="Edit Event"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Event name: "
-        android:id="@+id/name_eventProfile"/>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_event_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Organisation name: "
-        android:id="@+id/organisation_eventProfile"/>
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Date : "
-        android:id="@+id/date_eventProfile"/>
+        <TextView
+            android:id="@+id/name_eventProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Event name: " />
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Venue: "
-        android:id="@+id/venue_eventProfile"/>
+        <TextView
+            android:id="@+id/organisation_eventProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Organisation name: " />
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Website: "
-        android:id="@+id/website_eventProfile"/>
+        <TextView
+            android:id="@+id/date_eventProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Date : " />
 
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Admin: "
-        android:id="@+id/admin_eventProfile"/>
+        <TextView
+            android:id="@+id/venue_eventProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Venue: " />
+
+        <TextView
+            android:id="@+id/website_eventProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Website: " />
+
+        <TextView
+            android:id="@+id/admin_eventProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Admin: " />
 
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/dept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_add"
         android:layout_gravity="bottom|center"
-        app:backgroundTint="?android:attr/colorPrimaryDark"
-        android:id="@+id/dept" />
+        android:src="@android:drawable/ic_menu_add"
+        app:backgroundTint="?android:attr/colorPrimaryDark" />
 
 </FrameLayout>
