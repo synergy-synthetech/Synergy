@@ -3,6 +3,7 @@ package com.synthetech.synergyeventmanager;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -65,7 +66,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
         sales_create = (Switch) createFragmentView.findViewById(R.id.sales_create);
         fnb_create = (Switch) createFragmentView.findViewById(R.id.fnb_create);
 
-        button_back_create = (Button) createFragmentView.findViewById(R.id.button_back_create);
+        //button_back_create = (Button) createFragmentView.findViewById(R.id.button_back_create);
         button_create = (Button) createFragmentView.findViewById(R.id.button_create);
 
         if (firebaseAuth.getCurrentUser() == null) {
@@ -107,6 +108,16 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
 
         databaseReference.child("Event/"+name+"_"+creator_uid).setValue(createEvent);
 
+        String event_uid = createEvent.getUID();
+        Fragment fr=new EventProfileFragment();
+        FragmentManager fm=getFragmentManager();
+        FragmentTransaction ft=fm.beginTransaction();
+        Bundle args = new Bundle();
+        args.putString("EventUID", event_uid);
+        fr.setArguments(args);
+        ft.replace(R.id.main_container, fr);
+        ft.commit();
+        Snackbar.make(this.getView(),"Event created!",Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -114,7 +125,6 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
 
         if (v == button_create){
             CreateNewEvent();
-            Toast.makeText(this.getActivity(),"Changes updated!",Toast.LENGTH_SHORT).show();
         }
 
     }
