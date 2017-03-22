@@ -9,13 +9,16 @@
 
         <item
             android:id="@+id/create_nav"
+            android:icon="@drawable/ic_add_circle_black_18dp"
             android:title="Create Event"></item>
 
         <item
             android:id="@+id/hot_nav"
+            android:icon="@drawable/ic_whatshot_black_18dp"
             android:title="What's Hot?"></item>
         <item
             android:id="@+id/profile_nav"
+            android:icon="@drawable/ic_account_circle_black_18dp"
             android:title="My Profile"></item>
     </group>
 
@@ -24,15 +27,19 @@
         <menu>
             <item
                 android:id="@+id/privacy_nav"
+                android:icon="@drawable/ic_assignment_black_24dp"
                 android:title="Privacy policy"></item>
             <item
                 android:id="@+id/about_nav"
+                android:icon="@drawable/ic_face_black_18dp"
                 android:title="About us"></item>
             <item
                 android:id="@+id/help_nav"
+                android:icon="@drawable/ic_help_black_18dp"
                 android:title="Help"></item>
             <item
                 android:id="@+id/share_nav"
+                android:icon="@drawable/ic_share_black_18dp"
                 android:title="Share"></item>
         </menu>
 
