@@ -90,23 +90,12 @@
 
         </RadioGroup>
 
-        <LinearLayout
+
+        <ListView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="139dp"
+            android:id="@+id/dept_list_view"/>
 
-            <ListView
-                android:id="@+id/allMembersList"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <ListView
-                android:id="@+id/deptList"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-        </LinearLayout>
 
 
         <Button

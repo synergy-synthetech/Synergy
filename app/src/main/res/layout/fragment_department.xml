@@ -4,18 +4,51 @@
     android:layout_height="match_parent"
     tools:context="com.synthetech.synergyeventmanager.DepartmentFragment">
 
-
-    <TextView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Departments"
-        android:textSize="26dp" />
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/dept_listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Departments"
+                android:textSize="26dp" />
+
+            <ListView
+                android:id="@+id/dept_listView"
+                android:layout_width="match_parent"
+                android:layout_height="254dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="3.10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/new_dept_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Add a department"
+                    android:layout_weight="5"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:layout_weight="1"
+                    android:id="@+id/add_dept_button"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

@@ -51,7 +51,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View profileFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         fab_edit_profile = (FloatingActionButton) profileFragmentView.findViewById(R.id.fab_edit_profile);
-        profile_events = (ListView) profileFragmentView.findViewById(R.id.profile_event_list_view);
+        //profile_events = (ListView) profileFragmentView.findViewById(R.id.profile_event_list_view);
         email_profile = (TextView) profileFragmentView.findViewById(R.id.email_profile);
         phone_profile = (TextView) profileFragmentView.findViewById(R.id.phone_profile);
         logout = (Button) profileFragmentView.findViewById(R.id.logout);
