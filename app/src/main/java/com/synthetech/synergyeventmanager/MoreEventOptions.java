@@ -4,6 +4,8 @@ package com.synthetech.synergyeventmanager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +71,20 @@ public class MoreEventOptions extends Fragment {
                     join_event.setVisibility(View.GONE);
                     leave_event.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        more_departments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fr=new DepartmentFragment();
+                FragmentManager fm=getFragmentManager();
+                FragmentTransaction ft=fm.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("EventUID", event_uid);
+                fr.setArguments(args);
+                ft.replace(R.id.main_container, fr);
+                ft.commit();
             }
         });
 

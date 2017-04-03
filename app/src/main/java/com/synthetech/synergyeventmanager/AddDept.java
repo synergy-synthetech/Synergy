@@ -1,20 +1,18 @@
 package com.synthetech.synergyeventmanager;
 
-import android.widget.Switch;
-
 /**
- * Created by Aseem on 04-02-2017.
+ * Created by Aseem on 03-04-2017.
  */
 
 public class AddDept {
+    String dept;
+    String leader;
 
-    public Switch management_create;
-
-    public AddDept(){
-        //Empty Constructor
+    public AddDept() {
     }
 
-    public AddDept(Switch management_create) {
-        this.management_create = management_create;
+    public AddDept(String dept){
+        this.dept = dept;
     }
+
 }

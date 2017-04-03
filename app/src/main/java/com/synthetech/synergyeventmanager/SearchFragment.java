@@ -73,7 +73,7 @@ public class SearchFragment extends Fragment {
                 if (v == search) {
                     if (firebaseAuth.getCurrentUser() != null) {
 
-                    /*    if (search_term.getText().toString().equals("")) {
+                    /*    if (search_term.getText(e).toString().equals("")) {
                             events.setVisibility(View.GONE);
                         } else
                             events.setVisibility(View.VISIBLE);*/

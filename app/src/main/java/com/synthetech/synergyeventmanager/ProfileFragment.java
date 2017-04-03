@@ -76,6 +76,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
 
+/*
 
         //inflating List View
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Event");
@@ -128,6 +129,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             });
 
             //End of Inflation of listview
+*/
 
 
             email_profile.setText("Email: " + firebaseAuth.getCurrentUser().getEmail());
@@ -155,7 +157,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 }
             });
 
-        }//End of if - check if logged in.
+        //End of if - check if logged in.
+
+
 
 
         fab_edit_profile.setOnClickListener(this);

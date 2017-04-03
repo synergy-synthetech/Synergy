@@ -31,7 +31,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
     private DatabaseReference databaseReference;
 
     public EditProfile() {
-        // Required empty public constructor
+        // Required empty public uctor
     }
 
 
@@ -45,10 +45,13 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         phone_edit = (EditText) editProfileFragment.findViewById(R.id.phone_edit);
         email_edit = (EditText) editProfileFragment.findViewById(R.id.email_edit);
         save_edit = (Button) editProfileFragment.findViewById(R.id.save_edit);
-
         firebaseAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        if (user!=null)
+            email_edit.setText(user.getEmail());
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/User/"+user.getUid());
 
 
@@ -64,6 +67,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
 
                 if (phone != null)
                     phone_edit.setText(phone);
+
             }
 
             @Override
@@ -72,7 +76,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
             }
         });
 
-        email_edit.setText(user.getEmail());
+
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference();

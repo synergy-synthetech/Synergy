@@ -13,6 +13,13 @@
         android:src="@android:drawable/ic_menu_add"
         app:backgroundTint="?android:attr/colorPrimaryDark" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:text="Buy ticket(s)"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -93,6 +100,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Admin: " />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Event status: Completed/On-going"
+            android:layout_marginTop="10dp"
+            android:id="@+id/event_status"/>
+
+
 
     </LinearLayout>
 

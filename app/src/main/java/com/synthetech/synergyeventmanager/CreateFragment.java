@@ -26,10 +26,10 @@ import com.google.firebase.database.FirebaseDatabase;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class CreateFragment extends Fragment implements View.OnClickListener {
 
     private EditText name_create, organsation_create, date_create, website_create, venue_create;
-    private Switch management_create, marketing_create, creative_create, finance_create, guest_managers_create, sales_create, fnb_create;
+    //private Switch management_create, marketing_create, creative_create, finance_create, guest_managers_create, sales_create, fnb_create;
     private Button button_back_create, button_create;
     FirebaseAuth firebaseAuth;
 
@@ -58,15 +58,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
         website_create = (EditText) createFragmentView.findViewById(R.id.website_create);
         venue_create = (EditText) createFragmentView.findViewById(R.id.venue_create);
 
-        management_create = (Switch) createFragmentView.findViewById(R.id.management_create);
-        marketing_create = (Switch) createFragmentView.findViewById(R.id.marketing_create);
-        creative_create = (Switch) createFragmentView.findViewById(R.id.creative_create);
-        finance_create = (Switch) createFragmentView.findViewById(R.id.finance_create);
-        guest_managers_create = (Switch) createFragmentView.findViewById(R.id.guest_managers_create);
-        sales_create = (Switch) createFragmentView.findViewById(R.id.sales_create);
-        fnb_create = (Switch) createFragmentView.findViewById(R.id.fnb_create);
 
-        //button_back_create = (Button) createFragmentView.findViewById(R.id.button_back_create);
         button_create = (Button) createFragmentView.findViewById(R.id.button_create);
 
         if (firebaseAuth.getCurrentUser() == null) {
@@ -79,19 +71,15 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
             progressDialog.dismiss();
         }
 
-
-
         databaseReference = FirebaseDatabase.getInstance().getReference();
-
-
 
         button_create.setOnClickListener(this);
 
-            return createFragmentView;
-        }
+        return createFragmentView;
+    }
 
 
-    public void CreateNewEvent(){
+    public void CreateNewEvent() {
 
         String name = name_create.getText().toString().trim();
         String organisation = organsation_create.getText().toString().trim();
@@ -102,38 +90,31 @@ public class CreateFragment extends Fragment implements View.OnClickListener, Co
         String creator_uid = user.getUid();
         String email = user.getEmail();
 
-        management_create.setOnCheckedChangeListener(this);
+        //management_create.setOnCheckedChangeListener(this);
 
-        CreateEvent createEvent = new CreateEvent(name,organisation,venue,date,website,creator_uid,email);
+        CreateEvent createEvent = new CreateEvent(name, organisation, venue, date, website, creator_uid, email);
 
-        databaseReference.child("Event/"+name+"_"+creator_uid).setValue(createEvent);
+        databaseReference.child("Event/" + name + "_" + creator_uid).setValue(createEvent);
 
         String event_uid = createEvent.getUID();
-        Fragment fr=new EventProfileFragment();
-        FragmentManager fm=getFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
+        Fragment fr = new EventProfileFragment();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
         Bundle args = new Bundle();
         args.putString("EventUID", event_uid);
         fr.setArguments(args);
         ft.replace(R.id.main_container, fr);
         ft.commit();
-        Snackbar.make(this.getView(),"Event created!",Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(this.getView(), "Event created!", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
 
-        if (v == button_create){
+        if (v == button_create) {
             CreateNewEvent();
         }
 
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-      if (management_create.isChecked())
-      {
-        return;
-      }
-    }
 }

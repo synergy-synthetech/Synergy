@@ -32,7 +32,7 @@ public class CallMeetingFragment extends Fragment {
         // Inflate the layout for this fragment
         View callMeetingFragmentView = inflater.inflate(R.layout.fragment_call_meeting, container, false);
 
-        EditText topic_meeting = (EditText) callMeetingFragmentView.findViewById(R.id.topic_meeting);
+       /* EditText topic_meeting = (EditText) callMeetingFragmentView.findViewById(R.id.topic_meeting);
         EditText venue_meeting = (EditText) callMeetingFragmentView.findViewById(R.id.venue_meeting);
         EditText time_meeting = (EditText) callMeetingFragmentView.findViewById(R.id.time_meeting);
         EditText date_meeting = (EditText) callMeetingFragmentView.findViewById(R.id.date_meeting);
@@ -74,7 +74,7 @@ public class CallMeetingFragment extends Fragment {
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 
-
+*/
 
         return callMeetingFragmentView;
     }

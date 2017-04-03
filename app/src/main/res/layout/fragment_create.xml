@@ -49,65 +49,6 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Select relevant departments" />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <Switch
-                android:id="@+id/management_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Management (President, Vice-President, etc)" />
-
-            <Switch
-                android:id="@+id/marketing_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Marketing (Advertising, Sponsorship, etc)" />
-
-            <Switch
-                android:id="@+id/creative_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Creative (Decoration, Digital Imaging, etc)" />
-
-            <Switch
-                android:id="@+id/finance_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Finance (Treasurer, Sponsor, etc)" />
-
-            <Switch
-                android:id="@+id/guest_managers_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Guest Managers (List managers, ushers, etc)" />
-
-            <Switch
-                android:id="@+id/sales_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sales" />
-
-            <Switch
-                android:id="@+id/fnb_create"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="FnB (Food, Beverages, etc)" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.10" />
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
@@ -148,7 +89,7 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -156,7 +97,7 @@
                 <Button
                     android:id="@+id/button_create"
                     style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_width="319dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Create" />
 
