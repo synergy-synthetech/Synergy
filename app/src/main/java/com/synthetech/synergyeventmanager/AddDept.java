@@ -15,4 +15,11 @@ public class AddDept {
         this.dept = dept;
     }
 
+    public String getDept() {
+        return dept;
+    }
+
+    public String getLeader() {
+        return leader;
+    }
 }

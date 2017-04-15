@@ -49,8 +49,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        if (user!=null)
-            email_edit.setText(user.getEmail());
+        email_edit.setText(user.getEmail());
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/User/"+user.getUid());
 
@@ -92,6 +91,10 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         String phone = phone_edit.getText().toString().trim();
         String email = email_edit.getText().toString().trim();
 
+        if (phone==null)
+            phone="Not set...";
+        if (name==null)
+            name="Not set...";
 
         UserInformation userInformation = new UserInformation(name, phone, email);
 

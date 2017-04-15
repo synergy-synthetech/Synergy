@@ -11,7 +11,7 @@ public class UserInformation {
     public String email;
 
     public UserInformation(){
-        //Default Constructor
+
     }
 
     public UserInformation(String name, String phone, String email) {
@@ -26,7 +26,7 @@ public class UserInformation {
     }
 
     public String getPhone() {
-        return phone;
+            return phone;
     }
 
     public String getEmail() {

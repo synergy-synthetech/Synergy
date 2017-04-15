@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -29,9 +31,10 @@ import org.w3c.dom.Text;
 public class UserRegisterFragment extends Fragment implements View.OnClickListener {
     //Declare xml objects
     private FirebaseAuth firebaseAuth;
-    private EditText email_register, password_register, re_enter_password_register;
+    private EditText email_register, password_register, re_enter_password_register, full_name_register, phone_register;
     private Button button_register;
     private TextView login_register;
+
     ProgressDialog progressDialog;
     FragmentTransaction fragmentTransaction;
 
@@ -54,6 +57,8 @@ public class UserRegisterFragment extends Fragment implements View.OnClickListen
 
         login_register = (TextView) userRegisterFragmentView.findViewById(R.id.login_register);
         email_register = (EditText) userRegisterFragmentView.findViewById(R.id.email_register);
+        full_name_register = (EditText) userRegisterFragmentView.findViewById(R.id.full_name_register);
+        phone_register = (EditText) userRegisterFragmentView.findViewById(R.id.phone_register);
         password_register = (EditText) userRegisterFragmentView.findViewById(R.id.password_register);
         re_enter_password_register = (EditText) userRegisterFragmentView.findViewById(R.id.re_enter_password_register);
         button_register = (Button) userRegisterFragmentView.findViewById(R.id.button_register);
@@ -89,13 +94,23 @@ public class UserRegisterFragment extends Fragment implements View.OnClickListen
 
     private void registerUser() {
 
-        String email = email_register.getText().toString().trim();
+        final String email = email_register.getText().toString().trim();
         String password = password_register.getText().toString().trim();
         String re_enter_password = re_enter_password_register.getText().toString().trim();
+        final String name = full_name_register.getText().toString().trim();
+        final String phone = phone_register.getText().toString().trim();
 
         if (email.length() == 0) {
             email_register.setError("Username is required");
             email_register.requestFocus();
+        }
+        if (name.length() == 0) {
+            full_name_register.setError("Name is required");
+            full_name_register.requestFocus();
+        }
+        if (phone.length()!=10){
+            phone_register.setError("Phone number is required and must be exactly 10 digits long!");
+            phone_register.requestFocus();
         }
         if (password.length() == 0) {
             password_register.setError("Password is required");
@@ -106,14 +121,13 @@ public class UserRegisterFragment extends Fragment implements View.OnClickListen
             re_enter_password_register.requestFocus();
         }
         if (!(password.equals(re_enter_password))) {
-            //re_enter_password_register.setError("Passwords don't match");
-            //re_enter_password_register.requestFocus();
+            re_enter_password_register.setError("Passwords don't match");
+            re_enter_password_register.requestFocus();
         }
         if (password_register.length() < 8) {
             password_register.setError("Password should be at least 8 characters long");
             password_register.requestFocus();
-        }
-        else {
+        } else {
 
             progressDialog.setMessage("Registering user...");
             progressDialog.show();
@@ -124,6 +138,15 @@ public class UserRegisterFragment extends Fragment implements View.OnClickListen
                     if (task.isSuccessful()) {
                         Toast.makeText(UserRegisterFragment.this.getActivity(), "Registration successful!", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
+
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+                        UserInformation new_user = new UserInformation(name, phone, email);
+
+                        databaseReference.child("/User/"+firebaseAuth.getCurrentUser().getUid()).setValue(new_user);
+
                         ProfileFragment profileFragment = new ProfileFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -131,14 +154,19 @@ public class UserRegisterFragment extends Fragment implements View.OnClickListen
                         fragmentTransaction.commit();
 
                     } else {
-                        Toast.makeText(UserRegisterFragment.this.getActivity(), "Registration unsuccessful!"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserRegisterFragment.this.getActivity(), "Registration unsuccessful!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
                 }
             });
 
         }//End of else
+
+
+
     }//End of RegisterUser() Method
+
+
 }//End of class
 
 

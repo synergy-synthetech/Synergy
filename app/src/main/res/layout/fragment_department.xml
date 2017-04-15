@@ -21,12 +21,13 @@
                 android:text="Departments"
                 android:textSize="26dp" />
 
-            <ListView
-                android:id="@+id/dept_listView"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="254dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="3.10" />
+                android:layout_height="wrap_content"
+                android:id="@+id/event_name_dept"
+                android:text="Event Name"
+                android:textSize="10dp"
+                android:gravity="center_horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -49,6 +50,12 @@
                     android:id="@+id/add_dept_button"/>
 
             </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="473dp"
+                android:id="@+id/dept_list"></ListView>
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

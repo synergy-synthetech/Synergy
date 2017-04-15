@@ -51,11 +51,14 @@ public class MoreEventOptions extends Fragment {
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Join");
 
         if (firebaseAuth.getCurrentUser() != null) {
-            if (databaseReference.child(event_uid + "/" + firebaseAuth.getCurrentUser().getUid()) == null) {
+            if (databaseReference.child(event_uid + "/" + firebaseAuth.getCurrentUser().getUid()) != null) {
                 leave_event.setVisibility(View.VISIBLE);
+                join_event.setVisibility(View.GONE);
             }
-            else
+            else {
                 join_event.setVisibility(View.VISIBLE);
+                leave_event.setVisibility(View.GONE);
+            }
         }
 
         join_event.setOnClickListener(new View.OnClickListener() {
