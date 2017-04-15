@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Synergy was made as a final year project by Aseem Pandita, Shubham Upadhyay, Darpan Shirsat and Ajay Kolekar."
+        android:text="Synergy was made as a final year project by Aseem Pandita, Shubham Upadhyay, Darpan Shirsat and Ajay Kolekar. Synergy helps you to create an event amd manage it till the very end!"
         />
 
 </FrameLayout>

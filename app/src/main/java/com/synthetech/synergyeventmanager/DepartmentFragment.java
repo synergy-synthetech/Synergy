@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.auth.account.WorkAccountApi;
@@ -32,7 +33,8 @@ import java.util.List;
  */
 public class DepartmentFragment extends Fragment implements View.OnClickListener {
 
-    TextView EventName, DeptName;
+    EditText DeptName;
+    TextView EventName;
     Button addBTN;
     ListView dept_list;
 
@@ -46,15 +48,22 @@ public class DepartmentFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View DepartmentFragmentView = inflater.inflate(R.layout.fragment_department, container, false);
+        final View DepartmentFragmentView = inflater.inflate(R.layout.fragment_department, container, false);
         final String event_uid = getArguments().getString("EventUID");
-        DeptName= (TextView)DepartmentFragmentView.findViewById(R.id.new_dept_name);
+
+
+        DeptName= (EditText)DepartmentFragmentView.findViewById(R.id.new_dept_name);
         addBTN = (Button)DepartmentFragmentView.findViewById(R.id.add_dept_button);
         EventName = (TextView)DepartmentFragmentView.findViewById(R.id.event_name_dept);
         dept_list = (ListView)DepartmentFragmentView.findViewById(R.id.dept_list);
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         String rootRef = dataRef.toString();
+
+        Toast.makeText(getContext(), rootRef+" : rootRef", Toast.LENGTH_LONG).show();
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(rootRef+"/Event/"+event_uid+"/Department/");
+
+        Toast.makeText(getContext(), databaseReference.toString(), Toast.LENGTH_LONG).show();
 
         FirebaseListAdapter<AddDept> firebaseListAdapter = new FirebaseListAdapter<AddDept>(
                 getActivity(),
@@ -64,7 +73,8 @@ public class DepartmentFragment extends Fragment implements View.OnClickListener
             @Override
             protected void populateView(View v, AddDept dept, int position) {
 
-                DeptName.setText(dept.getDept());
+                TextView deptName = (TextView)v.findViewById(R.id.dept_name_listView);
+                deptName.setText(dept.getDept());
 
             }
         };
