@@ -24,9 +24,10 @@
             <TextView
                 android:id="@+id/dept_name_listView"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:text="Name"
-                android:textSize="20sp" />
+                android:textSize="30sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/dept_head_listView"

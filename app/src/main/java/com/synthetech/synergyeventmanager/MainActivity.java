@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         //Set the view for Create fragment
                         fragmentTransaction.replace(R.id.main_container, new CreateFragment());
 
-                        fragmentTransaction.addToBackStack("test");
+                        fragmentTransaction.addToBackStack("screen 1");
                         //Commit the fragment transaction
                         fragmentTransaction.commit();
 
@@ -168,7 +168,8 @@ public class MainActivity extends AppCompatActivity {
                         //Set the view for Profile fragment
                         fragmentTransaction.replace(R.id.main_container, new ProfileFragment());
 
-                        fragmentTransaction.addToBackStack("test");
+                        //fragmentTransaction.addToBackStack(null);
+
 
                         //Commit the fragment transaction
                         fragmentTransaction.commit();
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                         //Set the view for privacy fragment
                         fragmentTransaction.replace(R.id.main_container, new PrivacyFragment());
 
-                        fragmentTransaction.addToBackStack("test");
+                        fragmentTransaction.addToBackStack(null);
 
                         //Commit the fragment transaction
                         fragmentTransaction.commit();

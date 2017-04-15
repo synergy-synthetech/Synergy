@@ -1,7 +1,12 @@
 package com.synthetech.synergyeventmanager;
 
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,16 +25,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.URI;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class EditProfile extends Fragment implements View.OnClickListener {
 
+    private static final int PICK_IMAGE_REQUEST =234 ;
     private EditText name_edit, phone_edit, email_edit;
     private Button save_edit;
     FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+
 
     public EditProfile() {
         // Required empty public uctor
@@ -104,6 +114,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         databaseReference.child("User/" + user.getUid()).setValue(userInformation);
     }
 
+
     @Override
     public void onClick(View v) {
         if (v == save_edit) {
@@ -112,5 +123,9 @@ public class EditProfile extends Fragment implements View.OnClickListener {
             Snackbar.make(this.getView(), "Changes updated!", Snackbar.LENGTH_SHORT).show();
         }
 
+
     }
+
+
+
 }
