@@ -15,8 +15,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:padding="5dp"
             android:layout_gravity="center_horizontal|center_vertical"
             app:srcCompat="@drawable/com_facebook_profile_picture_blank_square"
@@ -34,6 +34,8 @@
                 android:layout_height="wrap_content"
                 android:text="Name"
                 android:textSize="20sp" />
+
+
 
             <TextView
                 android:id="@+id/user_email_listView"
@@ -53,10 +55,29 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/user_uid_listview" />
 
+
+            <SeekBar
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="10"
+                android:progress="3"
+                android:id="@+id/seekBar"
+                android:visibility="gone"/>
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/userprogress"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
 
     </LinearLayout>
+
+
 
 
 </LinearLayout>
