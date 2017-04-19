@@ -59,11 +59,7 @@ public class DepartmentFragment extends Fragment implements View.OnClickListener
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         String rootRef = dataRef.toString();
 
-        Toast.makeText(getContext(), rootRef+" : rootRef", Toast.LENGTH_LONG).show();
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(rootRef+"/Event/"+event_uid+"/Department/");
-
-        Toast.makeText(getContext(), databaseReference.toString(), Toast.LENGTH_LONG).show();
 
         FirebaseListAdapter<AddDept> firebaseListAdapter = new FirebaseListAdapter<AddDept>(
                 getActivity(),
@@ -75,6 +71,7 @@ public class DepartmentFragment extends Fragment implements View.OnClickListener
 
                 TextView deptName = (TextView)v.findViewById(R.id.dept_name_listView);
                 deptName.setText(dept.getDept());
+
 
             }
         };
@@ -91,7 +88,7 @@ public class DepartmentFragment extends Fragment implements View.OnClickListener
 
                 AddDept eventData = (AddDept) parent.getItemAtPosition(position);
 
-                String dept_name = eventData.getDept();
+                //String dept_name = eventData.getDept();
 
                 Fragment fr = new EventProfileFragment();
                 FragmentManager fm = getFragmentManager();
@@ -124,7 +121,6 @@ public class DepartmentFragment extends Fragment implements View.OnClickListener
             AddDept addDept = new AddDept(deptName);
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
             databaseReference.child("Event/"+event_uid+"/Department/"+deptName).setValue(addDept);
-            //databaseReference.setValue(addDept);
             String ref = databaseReference.toString();
             Snackbar.make(this.getView(),ref,Snackbar.LENGTH_LONG).show();
         }

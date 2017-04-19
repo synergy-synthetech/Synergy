@@ -1,6 +1,7 @@
 package com.synthetech.synergyeventmanager;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,8 +14,11 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.synthetech.synergyeventmanager.R.id.more_call_meeting;
 import static com.synthetech.synergyeventmanager.R.id.search_badge;
@@ -25,7 +29,7 @@ import static com.synthetech.synergyeventmanager.R.id.search_badge;
  */
 public class MoreEventOptions extends Fragment {
 
-    Button more_call_meeting, more_departments, more_department_heads, more_mentor, join_event, leave_event;
+    Button more_call_meeting, more_departments, more_department_heads, more_mentor, join_event, leave_event, chatButton;
 
     public MoreEventOptions() {
         // Required empty public constructor
@@ -46,20 +50,60 @@ public class MoreEventOptions extends Fragment {
         more_mentor = (Button) moreEventOptions.findViewById(R.id.more_mentor);
         join_event = (Button) moreEventOptions.findViewById(R.id.join_event);
         leave_event = (Button) moreEventOptions.findViewById(R.id.leave_event);
+        chatButton = (Button) moreEventOptions.findViewById(R.id.chat_button_moreOptions);
 
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Join");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/Event/"+event_uid+"/Member");
 
         if (firebaseAuth.getCurrentUser() != null) {
-            if (databaseReference.child(event_uid + "/" + firebaseAuth.getCurrentUser().getUid()) != null) {
+            if (databaseReference.child(firebaseAuth.getCurrentUser().getUid()) != null) {
                 leave_event.setVisibility(View.VISIBLE);
                 join_event.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 join_event.setVisibility(View.VISIBLE);
                 leave_event.setVisibility(View.GONE);
             }
         }
+
+
+        DatabaseReference mentorRef = FirebaseDatabase.getInstance().getReference().child("Event/" + event_uid + "/Mentor");
+        if (mentorRef != null) {
+            mentorRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    UserInformation mentor = dataSnapshot.getValue(UserInformation.class);
+                    //if (mentor.getEmail()!=null) {
+                        //more_mentor.setText("Mentor: "+mentor.getEmail());
+                    //}
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }//end of if --- mentorRef
+
+        chatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v == chatButton){
+                    /*Fragment fr = new ChatFragment();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    Bundle args = new Bundle();
+                    args.putString("EventUID", event_uid);
+                    fr.setArguments(args);
+                    ft.replace(R.id.main_container, fr);
+                    ft.commit();*/
+
+                    Intent intent = new Intent(getContext(), ChatActivity.class);
+                    intent.putExtra("EventUID", event_uid);
+                    startActivity(intent);
+                }
+            }
+        });
 
         join_event.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +112,8 @@ public class MoreEventOptions extends Fragment {
                     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                     JoinEvent joinEvent = new JoinEvent(firebaseAuth.getCurrentUser().getEmail());
-                    databaseReference.child("Join/" + event_uid + "/" + firebaseAuth.getCurrentUser().getUid()).setValue(joinEvent);
-
+                    databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(joinEvent);
+                    databaseReference.child("Join/"+event_uid).setValue(joinEvent);
                     Snackbar.make(getView(), "Event joined successfully!", Snackbar.LENGTH_SHORT).show();
                     join_event.setVisibility(View.GONE);
                     leave_event.setVisibility(View.VISIBLE);
@@ -80,9 +124,23 @@ public class MoreEventOptions extends Fragment {
         more_departments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fr=new DepartmentFragment();
-                FragmentManager fm=getFragmentManager();
-                FragmentTransaction ft=fm.beginTransaction();
+                Fragment fr = new DepartmentFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("EventUID", event_uid);
+                fr.setArguments(args);
+                ft.replace(R.id.main_container, fr);
+                ft.commit();
+            }
+        });
+
+        more_mentor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fr = new MentorSelect();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
                 Bundle args = new Bundle();
                 args.putString("EventUID", event_uid);
                 fr.setArguments(args);
@@ -94,8 +152,11 @@ public class MoreEventOptions extends Fragment {
         leave_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               databaseReference.child(event_uid).child(firebaseAuth.getCurrentUser().getUid()).setValue(null);
-                Snackbar.make(getView(),"You left this event!",Snackbar.LENGTH_SHORT).show();
+                FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(null);
+                databaseReference.child("Join/"+event_uid).setValue(null);
+                Snackbar.make(getView(), "You left this event!", Snackbar.LENGTH_SHORT).show();
                 join_event.setVisibility(View.VISIBLE);
                 leave_event.setVisibility(View.GONE);
                 // Toast.makeText(getContext(), databaseReference.toString(), Toast.LENGTH_SHORT).show();

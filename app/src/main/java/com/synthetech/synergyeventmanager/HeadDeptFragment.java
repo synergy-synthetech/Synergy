@@ -23,7 +23,10 @@ public class HeadDeptFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_head_dept, container, false);
+        View HeadDepartmentView = inflater.inflate(R.layout.fragment_head_dept, container, false);
+
+
+        return HeadDepartmentView;
     }
 
 }

@@ -1,0 +1,48 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.synthetech.synergyeventmanager.ChatFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/event_uid_chat"
+            android:hint="Event uid"
+            android:visibility="invisible"/>
+
+        <ListView
+            android:id="@+id/chat_listView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_above="@+id/message_textView"
+            android:layout_below="@+id/event_uid_chat" />
+
+
+
+        <EditText
+            android:id="@+id/message_textView"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:hint="Type a message"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/send_chatButton"
+            />
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

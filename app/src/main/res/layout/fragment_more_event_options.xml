@@ -4,63 +4,76 @@
     android:layout_height="match_parent"
     tools:context="com.synthetech.synergyeventmanager.MoreEventOptions">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <Button
-            android:id="@+id/more_call_meeting"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Call a meeting"
-            android:layout_weight="1"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/more_departments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Departments"
-            android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/more_department_heads"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Department Heads"
-            android:layout_weight="1"/>
+            <Button
+                android:id="@+id/more_call_meeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:text="Call a meeting" />
 
-        <Button
-            android:id="@+id/more_mentor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Mentor"
-            android:layout_weight="1"/>
+            <Button
+                android:id="@+id/more_departments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:text="Departments" />
 
-        <Button
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/join_event"
-            android:text="Join Event"
-            android:layout_margin="20dp"
-            android:layout_gravity="bottom|center"
-            style="@style/Base.Widget.AppCompat.Button.Colored"
-            android:layout_weight="1" />
+            <Button
+                android:id="@+id/more_department_heads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:text="Department Heads" />
 
-        <Button
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/leave_event"
-            android:layout_margin="20dp"
-            android:layout_gravity="bottom|center"
-            android:layout_weight="1"
-            android:text="Leave Event"/>
-    </LinearLayout>
+            <Button
+                android:id="@+id/more_mentor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:text="Mentor" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Event Members' Chat"
+                android:id="@+id/chat_button_moreOptions"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/join_event"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:text="Join Event"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/leave_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:text="Leave Event"
+                android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

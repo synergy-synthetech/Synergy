@@ -34,11 +34,11 @@ import org.w3c.dom.Text;
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private TextView email_profile, phone_profile;
-    private Button logout,created_events;
+    private Button logout, created_events, joined_events;
     private FirebaseAuth firebaseAuth;
     private FloatingActionButton fab_edit_profile;
 
-        //ListView profile_events;
+    //ListView profile_events;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -53,7 +53,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         fab_edit_profile = (FloatingActionButton) profileFragmentView.findViewById(R.id.fab_edit_profile);
         //profile_events = (ListView) profileFragmentView.findViewById(R.id.profile_event_list_view);
-        created_events = (Button)profileFragmentView.findViewById(R.id.profile_created_events_button);
+        created_events = (Button) profileFragmentView.findViewById(R.id.profile_created_events_button);
+        joined_events = (Button) profileFragmentView.findViewById(R.id.profile_joined_events_button);
         email_profile = (TextView) profileFragmentView.findViewById(R.id.email_profile);
         phone_profile = (TextView) profileFragmentView.findViewById(R.id.phone_profile);
         logout = (Button) profileFragmentView.findViewById(R.id.logout);
@@ -78,6 +79,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 //--------------------------------------------------------------------------------------------------
 
 
+        if (firebaseAuth.getCurrentUser() != null)
             email_profile.setText("Email: " + firebaseAuth.getCurrentUser().getEmail());
 
 
@@ -106,14 +108,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         //End of if - check if logged in.
 
 
-
-
         fab_edit_profile.setOnClickListener(this);
 
         logout.setOnClickListener(this);
 
         created_events.setOnClickListener(this);
 
+        joined_events.setOnClickListener(this);
 
 
         return profileFragmentView;
@@ -139,11 +140,19 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             fragmentTransaction.commit();
         }
 
-        if (v == created_events){
+        if (v == created_events) {
             JoinedEvents joinedEvents = new JoinedEvents();
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.main_container, joinedEvents);
+            fragmentTransaction.commit();
+        }
+
+        if (v == joined_events){
+            JoinedEventAsli joinedEventAsli = new JoinedEventAsli();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.main_container,joinedEventAsli);
             fragmentTransaction.commit();
         }
     }

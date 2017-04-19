@@ -5,16 +5,16 @@ package com.synthetech.synergyeventmanager;
  */
 
 public class JoinEvent {
-    public String email;
+    public String memberEmail;
 
     public JoinEvent() {
     }
 
-    public JoinEvent(String email) {
-        this.email = email;
+    public JoinEvent(String memberEmail) {
+        this.memberEmail = memberEmail;
     }
 
-    public String getEmail(){
-        return email;
+    public String getMemberEmail(){
+        return memberEmail;
     }
 }
