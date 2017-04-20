@@ -2,6 +2,7 @@ package com.synthetech.synergyeventmanager;
 
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -37,6 +38,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Button logout, created_events, joined_events;
     private FirebaseAuth firebaseAuth;
     private FloatingActionButton fab_edit_profile;
+    public TextView currentUser;
 
     //ListView profile_events;
 
@@ -50,6 +52,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View profileFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
+        final String user_uid = getArguments().getString("userUID");
 
         fab_edit_profile = (FloatingActionButton) profileFragmentView.findViewById(R.id.fab_edit_profile);
         //profile_events = (ListView) profileFragmentView.findViewById(R.id.profile_event_list_view);
@@ -58,6 +61,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         email_profile = (TextView) profileFragmentView.findViewById(R.id.email_profile);
         phone_profile = (TextView) profileFragmentView.findViewById(R.id.phone_profile);
         logout = (Button) profileFragmentView.findViewById(R.id.logout);
+
+        currentUser = (TextView) profileFragmentView.findViewById(R.id.currentUserUID_profile);
+        currentUser.setText(user_uid);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -83,29 +89,20 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             email_profile.setText("Email: " + firebaseAuth.getCurrentUser().getEmail());
 
 
-           /* DatabaseReference data = FirebaseDatabase.getInstance().getReferenceFromUrl("https://synergy-9f467.firebaseio.com/User/"+firebaseAuth.getCurrentUser().getUid());
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User/" + user_uid);
 
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserInformation user = dataSnapshot.getValue(UserInformation.class);
+                phone_profile.setText(user.getPhone());
+            }
 
-            data.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    UserInformation userInformation = dataSnapshot.getValue(UserInformation.class);
-                    String phone = userInformation.getPhone();
-                    String name = userInformation.getName();
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                    if (name!=null)
-                        name
-                    if (phone != null)
-                        phone_profile.setText("Phone: "+phone);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });*/
-
-        //End of if - check if logged in.
+            }
+        });
 
 
         fab_edit_profile.setOnClickListener(this);
@@ -141,18 +138,24 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         }
 
         if (v == created_events) {
-            JoinedEvents joinedEvents = new JoinedEvents();
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.main_container, joinedEvents);
-            fragmentTransaction.commit();
+            Fragment fr = new JoinedEvents();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            String user_uid = currentUser.getText().toString();
+            Bundle args = new Bundle();
+            args.putString("userUID", user_uid);
+            fr.setArguments(args);
+            ft.replace(R.id.main_container, fr);
+            ft.commit();
+
+
         }
 
-        if (v == joined_events){
+        if (v == joined_events) {
             JoinedEventAsli joinedEventAsli = new JoinedEventAsli();
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.main_container,joinedEventAsli);
+            fragmentTransaction.replace(R.id.main_container, joinedEventAsli);
             fragmentTransaction.commit();
         }
     }

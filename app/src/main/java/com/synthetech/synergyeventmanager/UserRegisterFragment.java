@@ -143,13 +143,17 @@ public class UserRegisterFragment extends Fragment implements View.OnClickListen
 
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-                        UserInformation new_user = new UserInformation(name, phone, email);
+                        String uid = databaseReference.push().toString();
 
-                        databaseReference.child("/User/"+firebaseAuth.getCurrentUser().getUid()).setValue(new_user);
+                        UserInformation new_user = new UserInformation(name, phone, email, uid);
+
+                        databaseReference.child("/User/"+uid).setValue(new_user);
 
                         ProfileFragment profileFragment = new ProfileFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        Bundle args = new Bundle();
+                        args.putString("userUID", uid);
                         fragmentTransaction.replace(R.id.main_container, profileFragment);
                         fragmentTransaction.commit();
 

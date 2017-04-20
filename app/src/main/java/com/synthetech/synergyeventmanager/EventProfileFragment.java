@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,9 +65,9 @@ public class EventProfileFragment extends Fragment {
                 TextView venue_eventProfile = (TextView) EventProfileFragmentView.findViewById(R.id.venue_eventProfile);
                 TextView website_eventProfile = (TextView) EventProfileFragmentView.findViewById(R.id.website_eventProfile);
                 TextView admin_eventProfile = (TextView) EventProfileFragmentView.findViewById(R.id.admin_eventProfile);
+                final Button eventMemberList = (Button) EventProfileFragmentView.findViewById(R.id.eventMemberListButton);
 
-                LinearLayout edit_event_menu = (LinearLayout) EventProfileFragmentView.findViewById(R.id.edit_event_menu);
-                FloatingActionButton edit_event_profile_button = (FloatingActionButton) EventProfileFragmentView.findViewById(R.id.fab_event_profile);
+
                 final FloatingActionButton more_event_options = (FloatingActionButton) EventProfileFragmentView.findViewById(R.id.more_event_options);
 
                 more_event_options.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +81,23 @@ public class EventProfileFragment extends Fragment {
                             args.putString("EventUID", event_uid);
                             fr.setArguments(args);
                             ft.replace(R.id.main_container, fr);
+                            ft.commit();
+                        }
+                    }
+                });
+
+                eventMemberList.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (v == eventMemberList){
+                            Fragment fr=new EventMemberList();
+                            FragmentManager fm=getFragmentManager();
+                            FragmentTransaction ft=fm.beginTransaction();
+                            Bundle args = new Bundle();
+                            args.putString("EventUID", event_uid);
+                            fr.setArguments(args);
+                            ft.replace(R.id.main_container, fr);
+                            ft.addToBackStack(null);
                             ft.commit();
                         }
                     }
@@ -102,12 +120,9 @@ public class EventProfileFragment extends Fragment {
                 //@SuppressWarnings("ConstantConditions") String user = firebaseAuth.getCurrentUser().toString();
                 if (firebaseAuth.getCurrentUser() != null) {
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                    String user = firebaseUser.getEmail().toString();
+                    String user = firebaseUser.getEmail();
 
                     if (user.equals(eventData.getCreatorEmail())) {
-                        edit_event_profile_button.setVisibility(View.VISIBLE);
-                        //Toast.makeText(EventProfileFragmentView, "Welcome Admin!", Toast.LENGTH_LONG).show();
-                        edit_event_menu.setVisibility(View.VISIBLE);
                         Snackbar.make(EventProfileFragmentView, "Welcome Admin!", Snackbar.LENGTH_LONG).show();
                     } else
                         Snackbar.make(EventProfileFragmentView, "Hello, " + firebaseUser.getEmail() + "!", Snackbar.LENGTH_LONG).show();

@@ -106,7 +106,7 @@ public class EditProfile extends Fragment implements View.OnClickListener {
         if (name==null)
             name="Not set...";
 
-        UserInformation userInformation = new UserInformation(name, phone, email);
+        UserInformation userInformation = new UserInformation(name, phone, email,firebaseAuth.getCurrentUser().getUid());
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 

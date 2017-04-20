@@ -79,8 +79,7 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    public void CreateNewEvent() {
-
+    public void CreateNewEvent(){
         String name = name_create.getText().toString().trim();
         String organisation = organsation_create.getText().toString().trim();
         String date = date_create.getText().toString().trim();
@@ -90,22 +89,39 @@ public class CreateFragment extends Fragment implements View.OnClickListener {
         String creator_uid = user.getUid();
         String email = user.getEmail();
 
-        //management_create.setOnCheckedChangeListener(this);
+        if (name.length() != 0 && organisation.length() != 0 && date.length() != 0 && venue.length() != 0) {
+            CreateEvent createEvent = new CreateEvent(name, organisation, venue, date, website, creator_uid, email);
+            databaseReference.child("Event/" + name + "_" + creator_uid).setValue(createEvent);
+            String event_uid = createEvent.getUID();
+            Fragment fr = new EventProfileFragment();
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            Bundle args = new Bundle();
+            args.putString("EventUID", event_uid);
+            fr.setArguments(args);
+            ft.replace(R.id.main_container, fr);
+            ft.commit();
+            Snackbar.make(this.getView(), "Event created!", Snackbar.LENGTH_SHORT).show();
+        } else {
+            if (name.length() == 0) {
+                name_create.setError("Name is required");
+                name_create.requestFocus();
+            }
+            if (organisation.length() == 0) {
+                organsation_create.setError("Organisation is required");
+                organsation_create.requestFocus();
+            }
+            if (date.length() != 10) {
+                date_create.setError("Date is required");
+                date_create.requestFocus();
+            }
 
-        CreateEvent createEvent = new CreateEvent(name, organisation, venue, date, website, creator_uid, email);
+            if (venue.length() == 0) {
+                venue_create.setError("Venue is required");
+                venue_create.requestFocus();
+            }
+        }
 
-        databaseReference.child("Event/" + name + "_" + creator_uid).setValue(createEvent);
-
-        String event_uid = createEvent.getUID();
-        Fragment fr = new EventProfileFragment();
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        Bundle args = new Bundle();
-        args.putString("EventUID", event_uid);
-        fr.setArguments(args);
-        ft.replace(R.id.main_container, fr);
-        ft.commit();
-        Snackbar.make(this.getView(), "Event created!", Snackbar.LENGTH_SHORT).show();
     }
 
     @Override

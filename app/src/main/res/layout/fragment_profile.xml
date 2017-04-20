@@ -91,7 +91,11 @@
             android:layout_height="wrap_content"
             android:text="Logout" />
 
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/currentUserUID_profile"
+    android:visibility="gone"/>
     </LinearLayout>
 
     <!--Layout ends here-->

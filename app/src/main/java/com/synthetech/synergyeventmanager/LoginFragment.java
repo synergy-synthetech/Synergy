@@ -110,6 +110,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         ProfileFragment profileFragment = new ProfileFragment();
                         FragmentManager fragmentManager = getFragmentManager();
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        Bundle args = new Bundle();
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        args.putString("UserUID", firebaseAuth.getCurrentUser().getUid());
                         fragmentTransaction.replace(R.id.main_container, profileFragment);
                         fragmentTransaction.commit();
 

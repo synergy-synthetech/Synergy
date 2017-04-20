@@ -111,12 +111,32 @@ public class MoreEventOptions extends Fragment {
                 if (v == join_event) {
                     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                    JoinEvent joinEvent = new JoinEvent(firebaseAuth.getCurrentUser().getEmail());
-                    databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(joinEvent);
-                    databaseReference.child("Join/"+event_uid+firebaseAuth.getCurrentUser().getUid()).setValue(joinEvent);
-                    Snackbar.make(getView(), "Event joined successfully!", Snackbar.LENGTH_SHORT).show();
-                    join_event.setVisibility(View.GONE);
-                    leave_event.setVisibility(View.VISIBLE);
+                    //JoinEvent joinEvent = new JoinEvent(firebaseAuth.getCurrentUser().getEmail());
+                    DatabaseReference userData = FirebaseDatabase.getInstance().getReference().child("User/");
+
+                    userData.orderByChild("email").equals(firebaseAuth.getCurrentUser().getEmail());
+
+                    userData.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                            final UserInformation user = dataSnapshot.getValue(UserInformation.class);
+                            databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(user);
+                            databaseReference.child("Join/"+event_uid+firebaseAuth.getCurrentUser().getUid()).setValue(user);
+                            Snackbar.make(getView(), "Event joined successfully!", Snackbar.LENGTH_SHORT).show();
+                            join_event.setVisibility(View.GONE);
+                            leave_event.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
                 }
             }
         });
@@ -171,12 +191,29 @@ public class MoreEventOptions extends Fragment {
             public void onClick(View v) {
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(null);
-                databaseReference.child("Join/"+event_uid).setValue(null);
-                Snackbar.make(getView(), "You left this event!", Snackbar.LENGTH_SHORT).show();
-                join_event.setVisibility(View.VISIBLE);
-                leave_event.setVisibility(View.GONE);
-                // Toast.makeText(getContext(), databaseReference.toString(), Toast.LENGTH_SHORT).show();
+                //JoinEvent joinEvent = new JoinEvent(firebaseAuth.getCurrentUser().getEmail());
+                DatabaseReference userData = FirebaseDatabase.getInstance().getReference().child("User/");
+
+                userData.orderByChild("email").equals(firebaseAuth.getCurrentUser().getEmail());
+
+                userData.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        final UserInformation user = dataSnapshot.getValue(UserInformation.class);
+                        databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(null);
+                        databaseReference.child("Join/"+event_uid+firebaseAuth.getCurrentUser().getUid()).setValue(null);
+                        Snackbar.make(getView(), "Event left successfully!", Snackbar.LENGTH_SHORT).show();
+                        join_event.setVisibility(View.VISIBLE);
+                        leave_event.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 

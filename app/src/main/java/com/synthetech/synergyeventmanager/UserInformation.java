@@ -9,16 +9,17 @@ public class UserInformation {
     public String name;
     public String phone;
     public String email;
+    public String uid;
 
     public UserInformation(){
 
     }
 
-    public UserInformation(String name, String phone, String email) {
+    public UserInformation(String name, String phone, String email, String uid) {
         this.name = name;
         this.phone = phone;
         this.email = email;
-
+        this.uid = uid;
     }
 
     public String getName() {
@@ -31,5 +32,9 @@ public class UserInformation {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUid() {
+        return uid;
     }
 }
