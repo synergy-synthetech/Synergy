@@ -113,7 +113,7 @@ public class MoreEventOptions extends Fragment {
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                     JoinEvent joinEvent = new JoinEvent(firebaseAuth.getCurrentUser().getEmail());
                     databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(joinEvent);
-                    databaseReference.child("Join/"+event_uid).setValue(joinEvent);
+                    databaseReference.child("Join/"+event_uid+firebaseAuth.getCurrentUser().getUid()).setValue(joinEvent);
                     Snackbar.make(getView(), "Event joined successfully!", Snackbar.LENGTH_SHORT).show();
                     join_event.setVisibility(View.GONE);
                     leave_event.setVisibility(View.VISIBLE);

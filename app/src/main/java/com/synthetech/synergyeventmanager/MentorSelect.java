@@ -37,25 +37,24 @@ public class MentorSelect extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View MentorSelectView =  inflater.inflate(R.layout.fragment_mentor_select, container, false);
+        View MentorSelectView = inflater.inflate(R.layout.fragment_mentor_select, container, false);
 
         final String event_uid = getArguments().getString("EventUID");
 
-        events = (ListView)MentorSelectView.findViewById(R.id.event_user_listView);
+        events = (ListView) MentorSelectView.findViewById(R.id.event_user_listView);
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Join/"+event_uid);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Join/" + event_uid);
 
-        FirebaseListAdapter<UserInformation> firebaseListAdapter = new FirebaseListAdapter<UserInformation>(
+        FirebaseListAdapter<JoinEvent> firebaseListAdapter = new FirebaseListAdapter<JoinEvent>(
                 getActivity(),
-                UserInformation.class,
+                JoinEvent.class,
                 R.layout.user_list_view_item,
-                databaseReference) {
+                databaseReference.orderByChild("memberEmail")) {
             @Override
-            protected void populateView(View v, UserInformation UserData, int position) {
-
+            protected void populateView(View v, JoinEvent model, int position) {
                 TextView Name_listView = (TextView) v.findViewById(R.id.user_name_listView);
 
-                Name_listView.setText(UserData.getEmail());
+                Name_listView.setText(model.getMemberEmail());
 
             }
         };
@@ -72,7 +71,7 @@ public class MentorSelect extends Fragment {
 
                 UserInformation eventData = (UserInformation) parent.getItemAtPosition(position);
 
-                DatabaseReference mentorRef = FirebaseDatabase.getInstance().getReference().child("Event/"+event_uid+"/Mentor/");
+                DatabaseReference mentorRef = FirebaseDatabase.getInstance().getReference().child("Event/" + event_uid + "/Mentor/");
                 mentorRef.setValue(eventData);
                 //Snackbar.make(view, "Successfully selected "+eventData.getEmail()+" as the mentor.", Snackbar.LENGTH_LONG).show();
 
