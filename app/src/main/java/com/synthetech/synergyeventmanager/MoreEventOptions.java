@@ -122,6 +122,7 @@ public class MoreEventOptions extends Fragment {
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                             final UserInformation user = dataSnapshot.getValue(UserInformation.class);
+                            Toast.makeText(getContext(), user.getEmail(), Toast.LENGTH_SHORT).show();
                             databaseReference.child("Event/" + event_uid + "/Member/" + firebaseAuth.getCurrentUser().getUid()).setValue(user);
                             databaseReference.child("Join/"+event_uid+firebaseAuth.getCurrentUser().getUid()).setValue(user);
                             Snackbar.make(getView(), "Event joined successfully!", Snackbar.LENGTH_SHORT).show();

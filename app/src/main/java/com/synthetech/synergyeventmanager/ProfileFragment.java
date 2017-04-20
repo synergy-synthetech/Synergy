@@ -52,7 +52,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View profileFragmentView = inflater.inflate(R.layout.fragment_profile, container, false);
-        final String user_uid = getArguments().getString("userUID");
 
         fab_edit_profile = (FloatingActionButton) profileFragmentView.findViewById(R.id.fab_edit_profile);
         //profile_events = (ListView) profileFragmentView.findViewById(R.id.profile_event_list_view);
@@ -63,6 +62,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         logout = (Button) profileFragmentView.findViewById(R.id.logout);
 
         currentUser = (TextView) profileFragmentView.findViewById(R.id.currentUserUID_profile);
+
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String user_uid = firebaseAuth.getCurrentUser().getUid();
         currentUser.setText(user_uid);
 
 
