@@ -22,4 +22,8 @@ public class AddDept {
     public String getLeader() {
         return leader;
     }
+
+    public void setLeader(String leader) {
+        this.leader = leader;
+    }
 }
