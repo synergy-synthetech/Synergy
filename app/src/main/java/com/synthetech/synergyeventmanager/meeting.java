@@ -8,25 +8,24 @@ public class Meeting {
 
     String topic;
     String calledBy;
-    String eventName;
+    String eventUID;
     String creatorEmail;
     String venue;
-    String scope;
+    String dept;
     String date;
-    String time;
+    //String time;
 
     public Meeting() {
     }
 
-    public Meeting(String topic, String calledBy, String eventName, String creatorEmail, String venue, String scope, String date, String time) {
+    public Meeting(String topic, String dept, String date, String calledBy, String eventUID) {
         this.topic = topic;
-        this.calledBy = calledBy;
-        this.eventName = eventName;
-        this.creatorEmail = creatorEmail;
-        this.venue = venue;
-        this.scope = scope;
         this.date = date;
-        this.time =time;
+        this.dept = dept;
+        this.calledBy = calledBy;
+        this.eventUID = eventUID;
+        //this.venue = venue;
+        //this.time =time;
     }
 
     public String getTopic() {
@@ -37,16 +36,16 @@ public class Meeting {
         return calledBy;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getEventUID() {
+        return eventUID;
     }
 
     public String getCreatorEmail() {
         return creatorEmail;
     }
 
-    public String getScope() {
-        return scope;
+    public String getDept() {
+        return dept;
     }
 
     public String getVenue() {
@@ -57,7 +56,7 @@ public class Meeting {
         return date;
     }
 
-    public String getTime() {
+    /*public String getTime() {
         return time;
-    }
+    }*/
 }

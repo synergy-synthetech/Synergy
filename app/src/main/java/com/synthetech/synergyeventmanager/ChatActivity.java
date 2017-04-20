@@ -30,6 +30,7 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
     EditText message;
     Button sendButton;
     TextView eventuid_txt;
+    TextView usermsg, chatmsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,9 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
         sendButton = (Button) findViewById(R.id.sendChatButton);
         eventuid_txt = (TextView) findViewById(R.id.chatActivityEventUID);
         eventuid_txt.setText(event_uid);
+
+
+
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -57,19 +61,23 @@ public class ChatActivity extends AppCompatActivity implements View.OnClickListe
 
         Toast.makeText(this, "Ref: "+databaseReference.toString(),Toast.LENGTH_LONG).show();
 
+
+
         FirebaseListAdapter<MessageTemplate> firebaseListAdapter = new FirebaseListAdapter<MessageTemplate>(
-                this,
+                ChatActivity.this,
                 MessageTemplate.class,
                 R.layout.message_template,
                 databaseReference.orderByChild("time")) {
             @Override
             protected void populateView(View v, MessageTemplate msg, int position) {
 
-                TextView chatmsg = (TextView) findViewById(R.id.chat_message_textView);
-                TextView usermsg = (TextView) findViewById(R.id.chat_user_textView);
+                chatmsg = (TextView) v.findViewById(R.id.chat_message_textView);
+                usermsg = (TextView) v.findViewById(R.id.chat_user_textView);
 
                 chatmsg.setText(msg.getMessage());
+
                 usermsg.setText(msg.getUser());
+
             }
         };
 

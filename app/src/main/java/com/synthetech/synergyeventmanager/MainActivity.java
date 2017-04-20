@@ -1,18 +1,25 @@
 package com.synthetech.synergyeventmanager;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -60,6 +67,29 @@ public class MainActivity extends AppCompatActivity {
 
         //Drawer listener
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+
+
+
+        //---------------------------------------------------------------------------------------------------------
+
+        int notificationID = 0;
+        Snackbar.make(this.findViewById(R.id.main_container), "I have reached here...",Snackbar.LENGTH_LONG).show();
+        Log.d("start", "started");
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+
+        mBuilder.setSmallIcon(R.drawable.synergy_logo_jpeg);
+        mBuilder.setContentTitle("Notification Alert, Click Me!");
+        mBuilder.setContentText("Hi, This is Android Notification Detail!");
+
+        NotificationManager mn = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mn.notify(notificationID, mBuilder.build());
+        //---------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 

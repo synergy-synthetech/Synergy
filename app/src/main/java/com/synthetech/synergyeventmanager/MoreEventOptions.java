@@ -135,6 +135,23 @@ public class MoreEventOptions extends Fragment {
             }
         });
 
+
+              more_call_meeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fr = new CallMeetingFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("EventUID", event_uid);
+                fr.setArguments(args);
+                ft.replace(R.id.main_container, fr);
+                ft.commit();
+            }
+        });
+
+
+
         more_mentor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,11 +180,7 @@ public class MoreEventOptions extends Fragment {
             }
         });
 
-       /* more_call_meeting.setOnClickListener(this);
-        more_departments.setOnClickListener(this);
-        more_department_heads.setOnClickListener(this);
-        more_mentor.setOnClickListener(this);
-*/
+
 
         return moreEventOptions;
     }
