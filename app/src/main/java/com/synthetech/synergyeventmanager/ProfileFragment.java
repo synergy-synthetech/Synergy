@@ -64,8 +64,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         currentUser = (TextView) profileFragmentView.findViewById(R.id.currentUserUID_profile);
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String user_uid = firebaseAuth.getCurrentUser().getUid();
-        currentUser.setText(user_uid);
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -89,6 +88,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         if (firebaseAuth.getCurrentUser() != null)
             email_profile.setText("Email: " + firebaseAuth.getCurrentUser().getEmail());
+
+        String user_uid = firebaseAuth.getCurrentUser().getUid();
+        currentUser.setText(user_uid);
 
 
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User/" + user_uid);

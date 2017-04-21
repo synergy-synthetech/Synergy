@@ -29,7 +29,7 @@ import static com.synthetech.synergyeventmanager.R.id.search_badge;
  */
 public class MoreEventOptions extends Fragment {
 
-    Button more_call_meeting, more_departments, more_department_heads, more_mentor, join_event, leave_event, chatButton;
+    Button more_call_meeting, more_departments, more_department_heads, more_mentor, more_guest, join_event, leave_event, chatButton;
 
     public MoreEventOptions() {
         // Required empty public constructor
@@ -45,6 +45,7 @@ public class MoreEventOptions extends Fragment {
         final String event_uid = getArguments().getString("EventUID");
 
         more_call_meeting = (Button) moreEventOptions.findViewById(R.id.more_call_meeting);
+        more_guest = (Button) moreEventOptions.findViewById(R.id.more_guest);
         more_departments = (Button) moreEventOptions.findViewById(R.id.more_departments);
         more_department_heads = (Button) moreEventOptions.findViewById(R.id.more_department_heads);
         more_mentor = (Button) moreEventOptions.findViewById(R.id.more_mentor);
@@ -112,7 +113,7 @@ public class MoreEventOptions extends Fragment {
                     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                     //JoinEvent joinEvent = new JoinEvent(firebaseAuth.getCurrentUser().getEmail());
-                    DatabaseReference userData = FirebaseDatabase.getInstance().getReference().child("User/");
+                    DatabaseReference userData = FirebaseDatabase.getInstance().getReference().child("User/"+firebaseAuth.getCurrentUser().getUid());
 
                     userData.orderByChild("email").equals(firebaseAuth.getCurrentUser().getEmail());
 
@@ -177,6 +178,20 @@ public class MoreEventOptions extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fr = new MentorSelect();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("EventUID", event_uid);
+                fr.setArguments(args);
+                ft.replace(R.id.main_container, fr);
+                ft.commit();
+            }
+        });
+
+        more_guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fr = new GuestListFragment();
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 Bundle args = new Bundle();

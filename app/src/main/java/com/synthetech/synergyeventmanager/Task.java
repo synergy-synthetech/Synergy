@@ -8,21 +8,25 @@ import java.util.Date;
 
 public class Task {
     String task;
-    String key;
+    //String key;
 
     public Task() {
     }
 
-    public Task(String task, String key) {
+    public Task(String task) {
         this.task = task;
-        this.key = key;
+        //this.key = key;
+    }
+
+    public void setTask(String task) {
+        this.task = task;
     }
 
     public String getTask() {
         return task;
     }
 
-    public String getKey() {
+    /*public String getKey() {
         return key;
-    }
+    }*/
 }

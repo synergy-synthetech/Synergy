@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,15 +98,15 @@ public class EventMemberList extends Fragment {
 
                 UserInformation user = (UserInformation) parent.getItemAtPosition(position);
 
-                Fragment fr = new TaskAdderFragment();
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
+                String passedVar = event_uid + "#" + user.getEmail();
+
+                TaskAdderFragment ldf = new TaskAdderFragment ();
                 Bundle args = new Bundle();
-                String passedVar = event_uid + "#" + user.getUid();
                 args.putString("passedVar", passedVar);
-                fr.setArguments(args);
-                ft.replace(R.id.main_container, fr);
-                ft.commit();
+                ldf.setArguments(args);
+
+                //Inflate the fragment
+                getFragmentManager().beginTransaction().replace(R.id.main_container, ldf).commit();
                 //Toast.makeText(view.getContext(), "Event Name: "+eventData.getName(), Toast.LENGTH_SHORT).show();
 
             }

@@ -55,7 +55,7 @@ public class GuestListFragment extends Fragment implements View.OnClickListener 
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference();
         String rootRef = dataRef.toString();
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(rootRef+"/Event/"+event_uid+"/Department/");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Guest/"+event_uid);
 
         FirebaseListAdapter<AddDept> firebaseListAdapter = new FirebaseListAdapter<AddDept>(
                 getActivity(),
@@ -103,8 +103,9 @@ public class GuestListFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-
-       eventname_guestlist.setText(event_uid);
+        String temp[] = event_uid.split("_");
+        String event_name = temp[0];
+        eventname_guestlist.setText(event_name);
         addtolistbutton.setOnClickListener(this);
 
 

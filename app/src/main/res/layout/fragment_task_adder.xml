@@ -12,10 +12,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User UID: " />
+            android:text="User UID: "
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/user_uid_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/event_uid_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
