@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
 
-                    /*case R.id.about_nav:
+                    case R.id.about_nav:
 
                         //Begin transaction to display the search (home) fragment
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -249,10 +249,10 @@ public class MainActivity extends AppCompatActivity {
 
                         //Close Drawer
                         drawerLayout.closeDrawers();
-                        break;*/
+                        break;
 
 
-                    /*case R.id.help_nav:
+                    case R.id.help_nav:
 
                         //Begin transaction to display the search (home) fragment
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //Close Drawer
                         drawerLayout.closeDrawers();
-                        break;*/
+                        break;
 
 
                     /*case R.id.share_nav:

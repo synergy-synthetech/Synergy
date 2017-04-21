@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.synthetech.synergyeventmanager.HelpFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,4 +77,5 @@ Once you click it, just fill in the basic event details like Name, Venue, Date, 
 After the event is created you can customize your event by choosing the more option, i.e '+' icon on your event profile.
 In this you can Add Departments and select Department heads according to the need of your organisation."/>
     </LinearLayout>
+    </ScrollView>
 </FrameLayout>
