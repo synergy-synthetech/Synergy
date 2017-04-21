@@ -174,6 +174,21 @@ public class MoreEventOptions extends Fragment {
 
 
 
+        more_department_heads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fr = new HeadDeptFragment();
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Bundle args = new Bundle();
+                args.putString("EventUID", event_uid);
+                fr.setArguments(args);
+                ft.replace(R.id.main_container, fr);
+                ft.commit();
+            }
+        });
+
+
         more_mentor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
