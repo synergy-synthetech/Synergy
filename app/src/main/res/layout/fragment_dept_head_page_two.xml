@@ -2,27 +2,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.synthetech.synergyeventmanager.HeadDeptFragment">
+    tools:context="com.synthetech.synergyeventmanager.DeptHeadPageTwo">
+
+    <!-- TODO: Update blank fragment layout -->
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select a department below:"
+            android:layout_gravity="center"
+            android:text="Select a Department Head"
             android:textSize="20dp"
-            android:layout_gravity="center_horizontal"/>
+            android:id="@+id/SelectHead"/>
 
         <ListView
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/DepartmentList_head"/>
+            android:id="@+id/SelectHeadList"/>
 
     </LinearLayout>
 
